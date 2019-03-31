@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { styles } from "../../utils";
-import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
+//import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
 
 export default class Footer extends Component {
   state = {
     icons: [
       {
         id: 1,
-        icon: <FaFacebook className="fbIcon" />,
+        icon: "",
         path: "https://www.facebook.com"
       },
       {
         id: 2,
-        icon: <FaTwitter className="twIcon" />,
+        icon: "",
         path: "https://www.twitter.com"
       },
       {
         id: 3,
-        icon: <FaInstagram className="insIcon" />,
+        icon: "",
         path: "https://www.instagram.com"
       }
     ]
@@ -26,25 +26,11 @@ export default class Footer extends Component {
   render() {
     return (
       <FooterWrapper>
-        <div className="title">Laffayette</div>
-        <div className="icons">
-          {this.state.icons.map(item => {
-            return (
-              <a
-                href={item.path}
-                key={item.id}
-                className="icon"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {item.icon}
-              </a>
-            );
-          })}
-        </div>
+        <div className="title">Das Handy</div>
+        <div className="icons" />
         <p className="copyright">
-          copyright &copy; 2024 de Laffayete, Creado con Gatsby. Powered with
-          React
+          copyright &copy; 2024 Das Handy Laden, Powered with react and
+          bootstrap.
         </p>
       </FooterWrapper>
     );

@@ -1,13 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { ButtonContainer } from "../../Button";
+import styled from "styled-components";
+import { styles } from "../../../utils";
 
 export default function Navbar() {
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">
-        Navbar
-      </a>
+    <NavWrapper className="navbar navbar-expand-lg navbar-light bg-light">
+      <ButtonContainer className="navbar-brand">logo</ButtonContainer>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarNav"
@@ -15,27 +17,36 @@ export default function Navbar() {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon" />
+        <span className="navbar-toggler-icon" />
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
-              Home <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Features
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Pricing
-            </a>
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav align-items-center">
+          <li className="nav-item ml-5">
+            <Link to="/" className="nav-link ">
+              Products<span className="sr-only">(current)</span>
+            </Link>
           </li>
         </ul>
+
+        <Link to="/Cart" className="nav-link ml-auto">
+          <ButtonContainer>
+            <span className="mr-2">
+              <i className="fas fa-cart-plus" />
+            </span>
+            My Cart
+          </ButtonContainer>
+        </Link>
       </div>
-    </nav>
+    </NavWrapper>
   );
 }
+const NavWrapper = styled.nav`
+  background: ${styles.colors.mainBlue} !important;
+  .nav-link {
+    color: ${styles.colors.mainWhite} !important;
+  }
+  .navbar-brand {
+    color: ${styles.colors.mainWhite} !important;
+    text-transform: capitalize !important;
+  }
+`;
