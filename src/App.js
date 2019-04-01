@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import Navbar from "./components/globals/navbar/Navbar";
 import Footer from "./components/globals/footer";
 import Product from "./components/Product";
@@ -9,6 +9,7 @@ import Details from "./components/Details";
 import Cart from "./components/Cart";
 import NotFound from "./components//404";
 import { Switch, Link, Route } from "react-router-dom";
+import Modal from "./components/modal";
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path="/Cart" component={Cart} />
           <Route scomponent={NotFound} />
         </Switch>
+        <Modal />
         <Footer />
       </React.Fragment>
     );

@@ -8,16 +8,58 @@ const ProductContext = React.createContext();
 class ProductProvider extends Component {
   state = {
     products: storeProducts,
-    detailProduct: detailProduct
+    detailProduct: detailProduct,
+    cart: [],
+    modalOpen: false,
+    modalProduct: detailProduct,
+    cartSubTotal: 0,
+    cartTax: 0,
+    cartTotal: 0
   };
   componentWillMount() {
     this.setProducts();
   }
-  handleDetail = () => {
-    console.log("hello from detail");
+  getItem = id => {
+    const product = this.state.products.find(item => item.id === id);
+    return product;
   };
-  addToCart = () => {
-    console.log("hello from addtocart");
+
+  handleDetail = id => {
+    const product = this.getItem(id);
+    this.setState(() => {
+      return { detailProduct: product };
+    });
+  };
+  addToCart = id => {
+    let tempProducts = [...this.state.products];
+    const index = tempProducts.indexOf(this.getItem(id));
+    const product = tempProducts[index];
+    product.inCart = true;
+    product.count = 1;
+    const price = product.price;
+    product.total = price;
+    this.setState(
+      () => {
+        return { products: tempProducts, cart: [...this.state.cart, product] };
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
+  };
+  openModal = id => {
+    const product = this.getItem(id);
+    this.setState(() => {
+      return {
+        modalProduct: product,
+        modalOpen: true
+      };
+    });
+  };
+  closeModal = () => {
+    this.setState({
+      modalOpen: false
+    });
   };
   setProducts = () => {
     let tempProducts = [];
@@ -29,6 +71,12 @@ class ProductProvider extends Component {
       products: tempProducts
     });
   };
+  increment = id => {
+    console.log("increment method");
+  };
+  decrement = id => {
+    console.log("decrement method");
+  };
 
   render() {
     return (
@@ -36,10 +84,11 @@ class ProductProvider extends Component {
         value={{
           ...this.state,
           handleDetail: this.handleDetail,
-          addToCart: this.addToCart
+          addToCart: this.addToCart,
+          openModal: this.openModal,
+          closeModal: this.closeModal
         }}
       >
-        <button onClick={this.tester}> click me</button>
         {this.props.children}
       </ProductContext.Provider>
     );
